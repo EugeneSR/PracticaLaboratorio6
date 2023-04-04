@@ -18,14 +18,14 @@ pipeline {
         stage('Build Project') {
             steps {
                 echo 'Building....'
-				sh 'npm install'
+				bat 'npm install'
             }
         }
 		stage('Execute Automation Tests') {
             steps {
                 echo 'Testing....'
                 catchError {
-                    sh 'npm run test'
+                    bat 'npm run test'
                 }
             }
         }
