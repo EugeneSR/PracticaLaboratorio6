@@ -5,34 +5,34 @@ pipeline {
         stage('Clone Repo') {
             steps {
                 echo 'Cloning...'
-				git branch: 'master', url: 'https://github.com/EugeneSR/Laboratorio6.git''		
-                			
+				git branch: 'main', url: 'https://github.com/EugeneSR/PracticaLaboratorio6.git'
+               			
             }
         }
         stage('Review Repo') {
             steps {
                 echo 'Revieweing...'
-				bat 'dir'
+				//bat 'dir'
             }
         }
         stage('Build Project') {
             steps {
                 echo 'Building....'
-				bat 'npm install'
+				sh 'npm install'
             }
         }
 		stage('Execute Automation Tests') {
             steps {
                 echo 'Testing....'
                 catchError {
-                    bat 'npm run test'
+                    sh 'npm run test'
                 }
             }
         }
         stage('Generate Allure Report') {
             steps {
                 echo 'Report....'
-                allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+				allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
             }
         }
     }
